@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+.AdminDashboard a.active{
+    @apply shadow-lg shadow-red-400 bg-red-400
+}
