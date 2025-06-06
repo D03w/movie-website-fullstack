@@ -6,6 +6,7 @@ import { AdminDashboard } from "./pages/admin/AdminDashboard"
 import AndminDashboardLayout from "./layout/AndminDashboardLayout"
 import { Register } from "./pages/auth/Register"
 import { ToastContainer } from "react-toastify"
+import Users from "./pages/admin/Users"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register/>}/>
           <Route path="/admin" element={<AndminDashboardLayout/>}>
             <Route index element={<AdminDashboard/>}/>
+            <Route path="/admin/users" element={<Users/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

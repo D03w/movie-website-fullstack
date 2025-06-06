@@ -4,7 +4,8 @@ export const BASE_URL = `http://localhost:3000/api/v1`
 
 export const APP_API = {
     auth: `${BASE_URL}/auth`,
-    movie: `${BASE_URL}/movie`
+    movie: `${BASE_URL}/movie`,
+    users: `${BASE_URL}/users`
 }
 
 const configs = {
@@ -18,7 +19,7 @@ export const BASE_CONFIG = {
         return await axios.post(api, data, configs)
     },
     doGet: async (api) => {
-        return await axios.post(api, configs)
+        return await axios.get(api, configs)
     },
     doPut: async (api, id, data) => {
         return await axios.put(`${api}/${id}`, data, configs)

@@ -1,6 +1,8 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { getMe, logOut } from '../../config/AuthService/authService'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -14,6 +16,18 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    getMe(setUser, navigate)
+  }, [])
+
+  const LogOutFunc = async () => {
+    logOut()
+    setUser(null)
+  }
+
   return (
     <Disclosure as="nav" className="bg-gray-950/50 fixed z-50 w-full">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -55,7 +69,7 @@ export default function Navbar() {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {/* Profile dropdown */}
-            {/* <Menu as="div" className="relative ml-3">
+            {user && <Menu as="div" className="relative ml-3">
               <div>
                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                   <span className="absolute -inset-1.5" />
@@ -91,16 +105,23 @@ export default function Navbar() {
                   <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    onClick={LogOutFunc}
                   >
                     Sign out
                   </a>
                 </MenuItem>
               </MenuItems>
-            </Menu> */}
-            <Link to='/login'>
-              <button className='p-2 rounded cursor-pointer hover:bg-red-600 bg-red-600/25 border border-red-600 transition duration-300'>Login</button>
-            </Link>
-            <button className='p-2 rounded cursor-pointer hover:bg-red-600/25 hover:border border-red-600 bg-red-600 ms-2 transition duration-300'>Register</button>
+            </Menu>}
+            {!user &&
+            <div>
+              <Link to='/login'>
+                <button className='p-2 rounded cursor-pointer hover:bg-red-600 bg-red-600/25 border border-red-600 transition duration-300'>Login</button>
+              </Link>
+              <Link to='/register'>
+                <button className='p-2 rounded cursor-pointer hover:bg-red-600/25 hover:border border-red-600 bg-red-600 ms-2 transition duration-300'>Register</button>
+              </Link>
+            </div>
+            }
           </div>
         </div>
       </div>
