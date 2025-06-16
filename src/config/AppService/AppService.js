@@ -10,3 +10,23 @@ export const AutoGet = async (api) => {
         toast.error(err.response?.data?.message ? err.response.data.message : err.message)
     }
 }
+
+export const AutoPost = async (api, data) => {
+    try{
+        const res = await BASE_CONFIG.doPost(api, data)
+
+        return res
+    }catch(err){
+        toast.error(err.response?.data?.message ? err.response.data.message : err.message)
+    }
+}
+
+export const AutoDelete = async (api, id) => {
+    try{
+        const res = await BASE_CONFIG.doDelete(api, id)
+
+        return res
+    }catch(err){
+        toast.error(err.response?.data?.message ? err.response.data.message : err.message)
+    }
+}

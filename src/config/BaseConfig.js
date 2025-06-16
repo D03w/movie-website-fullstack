@@ -5,7 +5,8 @@ export const BASE_URL = `http://localhost:3000/api/v1`
 export const APP_API = {
     auth: `${BASE_URL}/auth`,
     movie: `${BASE_URL}/movie`,
-    users: `${BASE_URL}/users`
+    users: `${BASE_URL}/users`,
+    genre: `${BASE_URL}/genre`
 }
 
 const configs = {

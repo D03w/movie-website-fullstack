@@ -41,10 +41,9 @@ export default function Users() {
                 </label>
             </div>
         </div>
-        <div className='mt-8'>
+        <div>
             <AutoTable
                 read={Read}
-                deleteItem={deleteItem}
                 head={UsersTableHead}
                 allData={users}
                 tableBody={userTableBody}

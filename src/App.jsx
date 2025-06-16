@@ -7,6 +7,9 @@ import AndminDashboardLayout from "./layout/AndminDashboardLayout"
 import { Register } from "./pages/auth/Register"
 import { ToastContainer } from "react-toastify"
 import Users from "./pages/admin/Users"
+import Movies from "./components/Movies"
+import MoviesAdmin from "./pages/admin/MoviesAdmin"
+import GenreAdmin from "./pages/admin/GenreAdmin"
 
 function App() {
 
@@ -23,6 +26,8 @@ function App() {
           <Route path="/admin" element={<AndminDashboardLayout/>}>
             <Route index element={<AdminDashboard/>}/>
             <Route path="/admin/users" element={<Users/>}/>
+            <Route path="/admin/movies" element={<MoviesAdmin/>}/>
+            <Route path="/admin/genre" element={<GenreAdmin/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
