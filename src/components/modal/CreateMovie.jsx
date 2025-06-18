@@ -1,8 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { ExclamationTriangleIcon, FilmIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import { AutoGet } from '../../config/AppService/AppService'
+import { APP_API } from '../../config/BaseConfig'
 
-export default function CreateMovie({ open, setOpen, form, handleChange, create }) {
+export default function CreateMovie({ open, setOpen, form, handleChange, formData, create, id, update }) {
+  const handleClick = () => {
+    if (id) {
+      update()
+    } else {
+      create()
+    }
+  }
+
   return (
     <div>
       <Dialog open={open} onClose={setOpen} className="relative z-10 texxt-white">
@@ -30,11 +40,19 @@ export default function CreateMovie({ open, setOpen, form, handleChange, create 
                       {
                         form?.map(item => (
                           <div className='mt-3'>
-                            <label className='w-full'>
+                            {item.type === "text" || item.type === "file" ? <label className='w-full'>
                               <span>{item.label}</span>
                               <br />
-                              <input type={item.type} placeholder='Kino nomini kiriting..' className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full'  onChange={(e) => handleChange(item.name, item.type === "text" ? e.target.value : e.target.files[0])} />
-                            </label>
+                              <input type={item.type} placeholder='Kino nomini kiriting..' className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full' value={item.type != "file" ? formData?.[item.name] : ''} onChange={(e) => handleChange(item.name, item.type === "text" ? e.target.value : e.target.files[0])} />
+                            </label> : (
+                              <select className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full bg-gray-950'>
+                                {
+                                  item.arr?.map(item => (
+                                    <option value={item.value}>{item.name}</option>
+                                  ))
+                                }
+                              </select>
+                            )}
                           </div>
                         ))
                       }
@@ -47,7 +65,7 @@ export default function CreateMovie({ open, setOpen, form, handleChange, create 
                   type="button"
                   onClick={() => {
                     setOpen(false)
-                    create()
+                    handleClick()
                   }}
                   className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 sm:ml-3 sm:w-auto"
                 >

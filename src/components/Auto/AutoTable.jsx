@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { AutoGet } from '../../config/AppService/AppService'
+import { APP_API } from '../../config/BaseConfig'
+import { Eye, Pencil, Trash } from 'lucide-react'
 
 export default function AutoTable({
     read,
     deleteItem,
+    update,
     head,
     allData,
     tableBody
@@ -42,24 +47,10 @@ export default function AutoTable({
                                             </th>
                                         )
                                     })}
-                                    {/* <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {item.name}
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        {item.surname}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {item.username}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {item.email}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {item.role}
-                                    </td> */}
-                                    <td>
-                                        {read && <button className='p-2 rounded bg-green-400 text-white cursor-pointer hover:bg-green-500'>Read</button>}
-                                        {deleteItem && <button className='p-2 rounded bg-red-500 text-white cursor-pointer hover:bg-red-600 ms-2' onClick={() => deleteItem(item._id)}>Delete</button>}
+                                    <td className='flex pt-4'>
+                                        {read && <button className='p-2 rounded bg-green-400 text-white cursor-pointer hover:bg-green-500'>Read <Eye/></button>}
+                                        {update && <button className='p-2 rounded bg-orange-400 text-white cursor-pointer hover:bg-orange-500 flex items-center justify-center' onClick={() => update(item._id)}>Update <Pencil/></button>}
+                                        {deleteItem && <button className='p-2 rounded bg-red-500 text-white cursor-pointer hover:bg-red-600 ms-2 flex items-center justify-center' onClick={() => deleteItem(item._id)}>Delete <Trash/></button>}
                                     </td>
                                 </tr>
                             ))

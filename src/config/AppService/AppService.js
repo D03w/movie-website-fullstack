@@ -30,3 +30,13 @@ export const AutoDelete = async (api, id) => {
         toast.error(err.response?.data?.message ? err.response.data.message : err.message)
     }
 }
+
+export const AutoUpdate = async (api, id, data) => {
+    try{
+        const res = await BASE_CONFIG.doPut(api, id, data)
+
+        return res
+    }catch(err){
+        toast.error(err.response?.data?.message ? err.response.data.message : err.message)
+    }
+}
