@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { AutoGet } from '../../config/AppService/AppService'
 import { APP_API } from '../../config/BaseConfig'
-import { Eye, Pencil, Trash } from 'lucide-react'
+import { ChevronLast, CirclePlay, Eye, Pencil, Trash } from 'lucide-react'
 
 export default function AutoTable({
     read,
@@ -10,7 +10,9 @@ export default function AutoTable({
     update,
     head,
     allData,
-    tableBody
+    tableBody,
+    trailer,
+    handleShow
 }) {
     return (
         <div>
@@ -23,6 +25,9 @@ export default function AutoTable({
                                     <th scope='col' className='px-6 py-3'>{item.name}</th>
                                 ))
                             }
+                            {trailer && <th scope='col' className='px-6 py-3'>
+                                Treyler
+                            </th>}
                             <th scope='col' className='px-6 py-3'>
                                 Settings
                             </th>
@@ -40,6 +45,12 @@ export default function AutoTable({
                                                 {
                                                     body.name === "photo" ? (
                                                         <img src={value} className='w-10 h-10 rounded-full object-cover' alt="" />
+                                                    ) : body.name === "genre" ? (
+                                                        <span>{value.name}</span>
+                                                    ) : body.name === "series" ? (
+                                                        <div>{item.movieType === "createSeries" ? (
+                                                            <button className='p-2 rounded bg-cyan-600 cursor-pointer hover:bg-cyan-700 flex items-center justify-center'>Davomi <ChevronLast className='ms-1'/></button>
+                                                        ) : ''}</div>
                                                     ) : (
                                                         <span>{value}</span>
                                                     )
@@ -47,6 +58,9 @@ export default function AutoTable({
                                             </th>
                                         )
                                     })}
+                                    {trailer && <td>
+                                        <button className='p-2 rounded bg-indigo-600 cursor-pointer hover:bg-indigo-700 flex items-center justify-center' onClick={() => handleShow(item)}>Treyler <CirclePlay className='ms-3'/></button>
+                                    </td>}
                                     <td className='flex pt-4'>
                                         {read && <button className='p-2 rounded bg-green-400 text-white cursor-pointer hover:bg-green-500'>Read <Eye/></button>}
                                         {update && <button className='p-2 rounded bg-orange-400 text-white cursor-pointer hover:bg-orange-500 flex items-center justify-center' onClick={() => update(item._id)}>Update <Pencil/></button>}

@@ -43,7 +43,7 @@ export const MoviesTableHead = [
         type: 'text'
     },
     {
-        name: 'Davomi',
+        name: 'Serial',
         type: 'text'
     },
     {

@@ -127,7 +127,7 @@ export default function GenreAdmin() {
                     }}>Qo'shish <Plus /></button>
                 </div>
             </div>
-            <AutoTable deleteItem={deleteGenre} update={clickUpdate} head={GenreTableHead} allData={allData} tableBody={genreTableBody} />
+            <AutoTable deleteItem={deleteGenre} update={clickUpdate} head={GenreTableHead} allData={allData} tableBody={genreTableBody} trailer={false}/>
         </div>
     )
 }

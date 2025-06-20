@@ -40,18 +40,48 @@ export default function CreateMovie({ open, setOpen, form, handleChange, formDat
                       {
                         form?.map(item => (
                           <div className='mt-3'>
-                            {item.type === "text" || item.type === "file" ? <label className='w-full'>
+                            {item.type === "text" || item.type === "file" && item.name != "season" ? <label className='w-full'>
                               <span>{item.label}</span>
                               <br />
                               <input type={item.type} placeholder='Kino nomini kiriting..' className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full' value={item.type != "file" ? formData?.[item.name] : ''} onChange={(e) => handleChange(item.name, item.type === "text" ? e.target.value : e.target.files[0])} />
-                            </label> : (
-                              <select className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full bg-gray-950'>
-                                {
-                                  item.arr?.map(item => (
-                                    <option value={item.value}>{item.name}</option>
-                                  ))
-                                }
-                              </select>
+                            </label> : item.name === "series" && item.name != "genre" && formData?.movieType === "series" || formData?.movieType === "animeSeries" ? (
+                              <div>
+                                <label>
+                                  <span>{item.label}</span>
+                                  <select className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full bg-gray-950' onChange={(e) => handleChange(item.name, e.target.value)}>
+                                    <option value={null}>Tanlang</option>
+                                    {
+                                      item.arr?.map(item => (
+                                        <option value={item.value}>{item.name}</option>
+                                      ))
+                                    }
+                                  </select>
+                                </label>
+                              </div>
+                            ) : item.name === "genre" ? (
+                               <label>
+                                  <span>{item.label}</span>
+                                  <select className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full bg-gray-950' onChange={(e) => handleChange(item.name, e.target.value)}>
+                                    <option value={null}>Tanlang</option>
+                                    {
+                                      item.arr?.map(item => (
+                                        <option value={item._id}>{item.name}</option>
+                                      ))
+                                    }
+                                  </select>
+                                </label>
+                            ) : item.name != "series" && item.name != "season" && item.name != "genre" && (
+                              <label>
+                                <span>{item.label}</span>
+                                <select className='p-2 text-white rounded border-1 border-red-300 mt-2 w-full bg-gray-950' onChange={(e) => handleChange(item.name, e.target.value)}>
+                                  <option value={null}>Tanlang</option>
+                                  {
+                                    item.arr?.map(item => (
+                                      <option value={item.value}>{item.name}</option>
+                                    ))
+                                  }
+                                </select>
+                              </label>
                             )}
                           </div>
                         ))
