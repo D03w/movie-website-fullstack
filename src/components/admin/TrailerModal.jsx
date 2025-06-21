@@ -10,7 +10,7 @@ export default function TrailerModal({trailer, setShow}) {
                 <X onClick={() => setShow(false)} className='cursor-pointer'/>
             </div>
             <div className='mt-4'>
-                <video src={trailer.trailer} autoPlay className='w-200 rounded object-cover'></video>
+                <video src={trailer.trailer} controls className='w-200 rounded object-cover'></video>
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ import Users from "./pages/admin/Users"
 import Movies from "./components/Movies"
 import MoviesAdmin from "./pages/admin/MoviesAdmin"
 import GenreAdmin from "./pages/admin/GenreAdmin"
+import OneMovie from "./pages/main/OneMovie"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Main />} />
+            <Route path="/one-movie/:id" element={<OneMovie/>}/>
           </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
